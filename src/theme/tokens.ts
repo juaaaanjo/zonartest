@@ -22,4 +22,4 @@ export const dimensions = {
 export const typography = {
   name: { fontSize: 16, fontWeight: "bold", color: colors.textPrimary },
   email: { fontSize: 14, fontWeight: "normal", color: colors.textSecondary },
-};
+} as const;
