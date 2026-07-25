@@ -58,4 +58,3 @@ from `src/theme/tokens.ts`, which mirror the spec (background `#F3F4F6`,
 ## Tech stack
 
 - Expo SDK 57 / React Native 0.86
-- No external state or UI libraries — plain React hooks and StyleSheet
