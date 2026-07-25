@@ -2,7 +2,7 @@ export interface RamdomUserApi {
   login?: { uuid?: string };
   name?: { first?: string; last?: string };
   email?: string;
-  avatar?: { thumbnail?: string };
+  picture?: { thumbnail?: string };
 }
 
 export interface RamdomUserApiResponse {
