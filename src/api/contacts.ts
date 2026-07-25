@@ -1,7 +1,7 @@
 import {
-    RamdomUserApi,
-    RamdomUserApiResponse,
-    contact,
+  RamdomUserApi,
+  RamdomUserApiResponse,
+  contact,
 } from "@/types/contacts";
 
 export const CONTACTS_ENDPOINT = "https://randomuser.me/api/?results=1000";
@@ -10,7 +10,7 @@ export function toContact(user: RamdomUserApi): contact {
   const firstName = user.name?.first;
   const lastName = user.name?.last;
   const email = user.email;
-  const thumbnail = user?.avatar?.thumbnail;
+  const thumbnail = user?.picture?.thumbnail;
 
   /* if (!firstName || !lastName || !email || !thumbnail) {
     return null;
