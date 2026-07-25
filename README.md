@@ -11,6 +11,8 @@ directory of 1,000 contacts, with real-time search by first or last name.
 > - **[`feat/test_completed`](../../tree/feat/test_completed)** contains the
 >   finished assessment, completed after the session.
 
+<img width="577" height="812" alt="Captura de Pantalla 2026-07-24 a la(s) 8 28 50 p m" src="https://github.com/user-attachments/assets/3e06d0bd-a546-4783-b039-2f73a542619f" />
+
 ## Get started
 
 1. Install dependencies
