@@ -1,6 +1,15 @@
-# Welcome to your Expo app 👋
+# Contact Directory App 📇
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Technical assessment: a React Native (Expo) screen that consumes the
+[randomuser.me](https://randomuser.me) public API to list and filter a
+directory of 1,000 contacts, with real-time search by first or last name.
+
+> **Note on branches**
+>
+> - **`main`** contains the code exactly as it was at the end of the live
+>   2-hour session.
+> - **[`feat/test_completed`](../../tree/feat/test_completed)** contains the
+>   finished assessment, completed after the session.
 
 ## Get started
 
@@ -16,51 +25,35 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+Then open it in [Expo Go](https://expo.dev/go), the iOS simulator, or an
+Android emulator.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Features
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Fetches 1,000 contacts from `https://randomuser.me/api/?results=1000`
+- Extracts first name, last name, email, and thumbnail from the nested JSON
+- Real-time local search by first or last name (filters on every keystroke)
+- Three visual states: Loading (`ActivityIndicator`), Error, and Success
 
-## Get a fresh project
+## Architecture
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+src
+   ---> types       --> API response and contact models
+   ---> api         --> fetch + mapping of the nested JSON (pure functions)
+   ---> hooks       --> useContacts: async state 
+   ---> theme       --> design tokens (colors, spacing, dimensions, typography)
+   ---> components  --> SearchBar, ContactDetail (contact card)
+   ---> screens     --> ContactScreen 
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Data flows in one direction: `api` fetches and maps the raw payload into a
+flat `contact` model, `useContacts` exposes it as a state machine, and the
+screen renders one branch per state. All styles consume the design tokens
+from `src/theme/tokens.ts`, which mirror the spec (background `#F3F4F6`,
+16px screen padding, 12px card radius, 50px circular avatars, etc.).
 
-### Other setup steps
+## Tech stack
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal app
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-
-
-
-src
-   ---> types 
-   ---> api 
-   ---> utils
-   ---> hooks
-   ---> components
-   ---> screens --> CustomerScreen
-
+- Expo SDK 57 / React Native 0.86
+- No external state or UI libraries — plain React hooks and StyleSheet
