@@ -1,49 +1,44 @@
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from "react-native";
 
+import { colors, dimensions, spacing, typography } from "@/theme/tokens";
+import { contact } from "@/types/contacts";
 
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+type Props = {
+  contact: contact;
+};
 
-export default function SearchBar() {
+export default function ContactDetail({ contact }: Props) {
   return (
-  <View>
-
-
-  </View>
+    <View style={styles.card}>
+      <Image source={{ uri: contact.thumbnail }} style={styles.avatar} />
+      <View style={styles.info}>
+        <Text style={styles.name}>
+          {contact.firstName} {contact.lastName}
+        </Text>
+        <Text style={styles.email}>{contact.email}</Text>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.surface,
+    borderRadius: spacing.cardRadius,
+    padding: spacing.cardPadding,
+    marginBottom: spacing.cardMarginBottom,
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: dimensions.avatar,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  info: {
+    marginLeft: spacing.cardPadding,
+    flexShrink: 1,
   },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
+  name: typography.name,
+  email: typography.email,
 });
